@@ -346,6 +346,7 @@ T List<T>::pop_back() {
 // =================================================================
 template <class T>
 T List<T>::remove_at(uint index) {
+	
 	T aux;
 	// TO DO
 	return aux;
