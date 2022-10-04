@@ -223,10 +223,23 @@ T List<T>::last() const {
 // =================================================================
 template <class T>
 T List<T>::get(uint index) const {
-	T aux;
+	Node<T> *aux;
+	int i;
+	aux = head;
 
-	// TO DO
-	return aux;
+	if(index >= size){
+		throw(IndexOutOfBounds());
+		//Mandamos mensaje de excepcion
+	}	
+
+	
+
+	//Iteracion 
+	for(int = 0; i < index; i++){
+		aux = aux->next; //Aux seria igual a la posicion indicada por i
+	}
+
+	return aux->value; //Regresamos el elemento en la posicion
 }
 
 // =================================================================
@@ -275,7 +288,32 @@ void List<T>::push_back(T val) {
 // =================================================================
 template <class T>
 void List<T>::insert_at(T val, uint index) {
-	// TO DO
+	Node<T> *p;
+	Node<T> *q;
+
+	q = new Node<T>(val);	
+
+	if(index > size || index < 0){
+		throw (IndexOutOfBounds()); //Arrojamos Mensaje de Excepcion
+	} 
+	else if(index == 0){
+		head = new Node<T>(val, head);
+		size++;
+		return;
+	}
+
+	p = head;
+
+	//RECORREMOS INDEX
+	for(int i = 0; i < index-1; i++){
+		p = p->next;
+	}
+
+	//Agregamos el elemento en index y vamos desplazando a la derecha
+	q->next = p->next;
+	p->next = q;
+	size++;
+	return;
 }
 
 // =================================================================
@@ -346,10 +384,37 @@ T List<T>::pop_back() {
 // =================================================================
 template <class T>
 T List<T>::remove_at(uint index) {
-	
-	T aux;
-	// TO DO
-	return aux;
+	Node<T> *aux;
+
+	Node<T> *aux2;
+
+	int x; //Elemento en la posicion indicada
+	x = 0;
+
+	aux = head;
+	aux2 = aux;
+
+	//Arrojamos mensaje de excepcion
+	if(index >= size || index < 0){
+		throw(IndexOutOfBounds())
+	}
+	else if(index == 0){
+		x = head->value;
+		head = aux->next;
+		delete aux; //Eliminamos el elemento del index
+		size--;
+		return x; //Regresamos el elemento en la posicion indicada
+	}
+
+	for (int i = 0; i < index-1; i++){ //RECORREMOS INDEX
+		aux2 = aux->next;
+	}
+	aux = aux2->next;
+	aux2->next = aux->aux2;
+	x = aux->value;
+	delete aux; //Eliminamos el elemento
+	size--;
+	return x; //Regresamos el elemento en la posicion indicada
 }
 
 // =================================================================
@@ -360,8 +425,17 @@ T List<T>::remove_at(uint index) {
 // =================================================================
 template <class T>
 long int List<T>::indexOf(T val) const {
-	// TO DO
-	return -1;
+	Node<T> *p = head;
+
+
+	int i = 0;
+	while (p != NULL){ //Mientras sea diferente a null
+		if(p-> value == val){  //Si el valor del index es igual al val
+			return i; //Regresamos la posicion de val
+		}p = p->next;
+		i++; //Iteramos
+	}
+	return -1; //En el caso de que no, regresamos -1
 }
 
 #endif /* LIST_H */
