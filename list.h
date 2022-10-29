@@ -235,7 +235,7 @@ T List<T>::get(uint index) const {
 	
 
 	//Iteracion 
-	for(int = 0; i < index; i++){
+	for(int i = 0; i < index; i++){
 		aux = aux->next; //Aux seria igual a la posicion indicada por i
 	}
 
@@ -396,7 +396,7 @@ T List<T>::remove_at(uint index) {
 
 	//Arrojamos mensaje de excepcion
 	if(index >= size || index < 0){
-		throw(IndexOutOfBounds())
+		throw(IndexOutOfBounds());
 	}
 	else if(index == 0){
 		x = head->value;
@@ -407,10 +407,10 @@ T List<T>::remove_at(uint index) {
 	}
 
 	for (int i = 0; i < index-1; i++){ //RECORREMOS INDEX
-		aux2 = aux->next;
+		aux2 = aux2->next;
 	}
 	aux = aux2->next;
-	aux2->next = aux->aux2;
+	aux2->next = aux->next;
 	x = aux->value;
 	delete aux; //Eliminamos el elemento
 	size--;
